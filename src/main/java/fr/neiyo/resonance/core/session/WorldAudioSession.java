@@ -38,11 +38,6 @@ public final class WorldAudioSession extends AudioSession {
 
         if (!world.equals(this.world)) return;
 
-        PacketHandler handler = player.getPacketHandler();
-
-        ChannelConnection voiceChannel = handler.getChannel(StreamType.Voice);
-        if (voiceChannel == null || !voiceChannel.isActive()) return;
-
         Vector3d vector3d = transform.getPosition();
         if (isTooFar(player, vector3d)) return;
 
