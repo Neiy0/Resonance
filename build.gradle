@@ -21,13 +21,7 @@ repositories {
         name = "hytale-release"
         url = uri("https://maven.hytale.com/release")
     }
-    repositories {
-        maven { url 'https://jitpack.io' }
-    }
-
-    repositories {
-        maven { url "https://www.cursemaven.com" }
-    }
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
