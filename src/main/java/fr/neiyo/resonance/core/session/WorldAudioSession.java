@@ -44,20 +44,9 @@ public final class WorldAudioSession extends AudioSession {
         if (voiceChannel == null || !voiceChannel.isActive()) return;
 
         Vector3d vector3d = transform.getPosition();
-        Position position = new Position(vector3d.x(), vector3d.y(), vector3d.z());
-
         if (isTooFar(player, vector3d)) return;
 
-        RelayedVoiceData packet = new RelayedVoiceData();
-        packet.speakerId = virtual_entity_uuid;
-        packet.entityId = virtual_entity_id;
-        packet.sequenceNumber = seq;
-        packet.timestamp = timestamp;
-        packet.speakerPosition = position;
-        packet.speakerIsUnderwater = false;
-        packet.opusData = opusData;
-
-        voiceChannel.writeAndFlush(packet);
+        super.sendToPlayer(player, opusData, seq, timestamp, vector3d);
     }
 
     private boolean isTooFar(PlayerRef player, Vector3d transformVector) {

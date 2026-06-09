@@ -17,14 +17,7 @@ public final class OpusEncoderWrapper {
     private final OpusEncoder encoder;
 
     public OpusEncoderWrapper() {
-        try {
-            this.encoder = new OpusEncoder(SAMPLE_RATE, CHANNELS, OpusApplication.OPUS_APPLICATION_AUDIO);
-            this.encoder.setBitrate(BITRATE);
-            this.encoder.setComplexity(5);
-            this.encoder.setSignalType(OpusSignal.OPUS_SIGNAL_MUSIC);
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to initialize Opus encoder", e);
-        }
+        this(BITRATE);
     }
 
     public OpusEncoderWrapper(int bitrate) {

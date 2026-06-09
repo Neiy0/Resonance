@@ -21,6 +21,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Function;
 
 public abstract class AudioSession implements IAudioSession {
 
@@ -73,7 +74,7 @@ public abstract class AudioSession implements IAudioSession {
 
     @Override
     public void setVolume(float volume) {
-        this.volume = Math.max(0f, Math.min(1f, volume));
+        this.volume = Math.clamp(volume, 0f, 1f);
     }
 
     @Override
@@ -157,12 +158,15 @@ public abstract class AudioSession implements IAudioSession {
     }
 
     protected void sendToPlayer(@Nonnull PlayerRef player, byte[] opusData, short seq, int timestamp) {
+        sendToPlayer(player, opusData, seq, timestamp, player.getTransform().getPosition());
+    }
+
+    protected void sendToPlayer(@Nonnull PlayerRef player, byte[] opusData, short seq, int timestamp, Vector3d pos) {
         PacketHandler handler = player.getPacketHandler();
 
         ChannelConnection voiceChannel = handler.getChannel(StreamType.Voice);
         if (voiceChannel == null || !voiceChannel.isActive()) return;
 
-        Vector3d pos = player.getTransform().getPosition();
         Position position = new Position(pos.x(), pos.y(), pos.z());
 
         RelayedVoiceData packet = new RelayedVoiceData();
