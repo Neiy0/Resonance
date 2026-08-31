@@ -28,7 +28,7 @@ dependencies {
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
 
-    compileOnly 'com.hypixel.hytale:Server:0.5.4'
+    compileOnly 'com.hypixel.hytale:Server:0.6.2'
 
     implementation("io.github.jaredmdobson:concentus:1.0.2")
     implementation 'javazoom:jlayer:1.0.1'
